@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ATestTask.FileSort.Generate": {
+      "commandName": "Project",
+      "commandLineArgs": "sort f:\\ATestTask\\G001.txt"
+    }
+  }
+}

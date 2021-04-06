@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "ATestTask.FileSort.Create": {
+      "commandName": "Project"
+    }
+  }
+}
