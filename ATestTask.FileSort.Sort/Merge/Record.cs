@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Buffers;
 
-namespace AltTestTask.FileSort.Sort.Merge
+namespace ATestTask.FileSort.Sort.Merge
 {
     public record Record
     {

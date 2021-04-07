@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 
-namespace AltTestTask.FileSort.Sort.Merge
+namespace ATestTask.FileSort.Sort.Merge
 {
     public static class RecordComparer
     {

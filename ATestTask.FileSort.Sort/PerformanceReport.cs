@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AltTestTask.FileSort.Sort
+namespace ATestTask.FileSort.Sort
 {
     class PerformanceReport
     {

@@ -1,21 +1,25 @@
-﻿using AltTestTask.FileSort.Sort.Merge;
+﻿using ATestTask.FileSort.Sort.Merge;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace AltTestTask.FileSort.Sort
+namespace ATestTask.FileSort.Sort
 {
-    public class ExternalRunCollection : IDisposable, IEnumerable<FileLineIterator>
-    {
-        private List<FileLineIterator> _recordStreams;
 
-        public ExternalRunCollection(IEnumerable<string> fileNames)
+    public interface IAsyncDisposableEnumerator<T> : IAsyncEnumerator<T>, IAsyncDisposable, IDisposable { }
+
+
+    public sealed class ExternalRunCollection : IDisposable, IEnumerable<IAsyncEnumerator<Record>>
+    {
+        private List<IAsyncDisposableEnumerator<Record>> _recordStreams;
+
+        public ExternalRunCollection(IEnumerable<string> fileNames, Func<FileStream, IAsyncDisposableEnumerator<Record>> iteratorFactory)
         {
             _recordStreams = fileNames.Select(file => {
                 var fileStream = new FileStream(file, FileMode.Open, FileAccess.Read);
-                return new FileLineIterator(fileStream, maxBytesToConsume: long.MaxValue);
+                return iteratorFactory(fileStream);
             }).ToList();
         }
 
@@ -27,7 +31,7 @@ namespace AltTestTask.FileSort.Sort
             }
         }
 
-        public IEnumerator<FileLineIterator> GetEnumerator()
+        public IEnumerator<IAsyncEnumerator<Record>> GetEnumerator()
         {
             return _recordStreams.GetEnumerator();
         }

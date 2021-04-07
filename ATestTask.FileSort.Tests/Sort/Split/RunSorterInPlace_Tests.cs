@@ -1,12 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using System.Threading.Tasks;
-using AltTestTask.FileSort.Sort.Split;
+using ATestTask.FileSort.Sort.Split;
 using System.Linq;
 using Shouldly;
 using System;
 
-namespace AltTestTask.FileSort.Tests.Sort.Split
+namespace ATestTask.FileSort.Tests.Sort.Split
 {
     [TestClass]
     public class RunSorterInPlace_Tests

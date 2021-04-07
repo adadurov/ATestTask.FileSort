@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace AltTestTask.FileSort.Sort.CLI
+namespace ATestTask.FileSort.Sort.CLI
 {
     class Program
     {
@@ -24,6 +24,7 @@ namespace AltTestTask.FileSort.Sort.CLI
                     options.SourceFilePath,
                     options.RunSizeHintInMiB,
                     options.MaxDegreeOfParallelism,
+                    mergeBufferSizePerRun: 1024 * 1024,
                     Log);
 
                 await driver.Sort();

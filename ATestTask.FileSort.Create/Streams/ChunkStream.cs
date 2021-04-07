@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace AltTestTask.FileSort.Create.Streams
+namespace ATestTask.FileSort.Create.Streams
 {
     /// <summary>
     /// a stream of strings that produces strings, each of which contains a chunk of lines

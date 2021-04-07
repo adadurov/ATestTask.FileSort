@@ -2,9 +2,9 @@
 using System.IO;
 using Shouldly;
 using System.Linq;
-using AltTestTask.FileSort.Sort.Split;
+using ATestTask.FileSort.Sort.Split;
 
-namespace AltTestTask.FileSort.Tests.Sort.Split
+namespace ATestTask.FileSort.Tests.Sort.Split
 {
     [TestClass]
     public class FileSplitHelper_Tests

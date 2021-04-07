@@ -1,4 +1,4 @@
-﻿namespace AltTestTask.FileSort
+﻿namespace ATestTask.FileSort
 {
     public static class Units
     {

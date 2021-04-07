@@ -1,6 +1,6 @@
 ﻿using CommandLine;
 
-namespace AltTestTask.FileSort.Sort.CLI
+namespace ATestTask.FileSort.Sort.CLI
 {
     public class Options
     {

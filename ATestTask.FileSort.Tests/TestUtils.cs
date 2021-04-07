@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace AltTestTask.FileSort.Tests
+namespace ATestTask.FileSort.Tests
 {
     public static class TestUtils
     {

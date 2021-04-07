@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 
-namespace AltTestTask.FileSort.Sort.Split
+namespace ATestTask.FileSort.Sort.Split
 {
     public class RecordRefComparer
     {

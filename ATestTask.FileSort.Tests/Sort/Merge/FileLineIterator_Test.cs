@@ -1,4 +1,4 @@
-using AltTestTask.FileSort.Sort.Merge;
+using ATestTask.FileSort.Sort.Merge;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Shouldly;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AltTestTask.FileSort.Tests.Sort.Merge
+namespace ATestTask.FileSort.Tests.Sort.Merge
 {
     [TestClass]
     public class FileLineIterator_Test
@@ -18,7 +18,7 @@ namespace AltTestTask.FileSort.Tests.Sort.Merge
         {
             return new FileLineIterator(
                 fileStream,
-                maxBytesToConsume: long.MaxValue
+                mergeBufferSizePerRun: 1024 * 1024
             );
         }
 
@@ -126,6 +126,29 @@ namespace AltTestTask.FileSort.Tests.Sort.Merge
             }
         }
 
+
+        [TestMethod]
+        public async Task Test_Merge_01G_10_Runs_HDD()
+        {
+            var runsFolder = @"d:\atesttask\G001.chunks";
+            await MergeRuns(runsFolder);
+        }
+
+        [TestMethod]
+        public async Task Test_Merge_01G_25_Runs_HDD()
+        {
+            var runsFolder = @"d:\atesttask\G001_025.chunks";
+            await MergeRuns(runsFolder);
+        }
+
+        [TestMethod]
+        public async Task Test_Merge_10G_100_Runs_HDD()
+        {
+            var runsFolder = @"d:\atesttask\G010_100.chunks";
+            await MergeRuns(runsFolder);
+        }
+
+
         [TestMethod]
         public async Task Test_Merge_01G_10_Runs()
         {
@@ -148,7 +171,7 @@ namespace AltTestTask.FileSort.Tests.Sort.Merge
         }
 
         [TestMethod]
-        public async Task Test_Merge_10G_100_Chunks()
+        public async Task Test_Merge_10G_100_Runs()
         {
             var runsFolder = @"f:\atesttask\G010_100.chunks";
             await MergeRuns(runsFolder);
@@ -163,11 +186,12 @@ namespace AltTestTask.FileSort.Tests.Sort.Merge
             var streams = directoryFiles.Select(file =>
             {
                 var fileStream = new FileStream(file.FullName, FileMode.Open, FileAccess.Read);
-
-                return (fileStream, new FileLineIterator(
+                var iterator = new FileLineIterator(
                     fileStream,
-                    maxBytesToConsume: long.MaxValue
-                ));
+                    mergeBufferSizePerRun: 1024 * 1024
+                );
+
+                return (fileStream, iterator);
             });
 
 
@@ -178,8 +202,8 @@ namespace AltTestTask.FileSort.Tests.Sort.Merge
 
             foreach (var stream in streams)
             {
-                stream.Item2.Dispose();
-                stream.Item1.Dispose();
+                stream.iterator.Dispose();
+                stream.fileStream.Dispose();
             }
         }
     }

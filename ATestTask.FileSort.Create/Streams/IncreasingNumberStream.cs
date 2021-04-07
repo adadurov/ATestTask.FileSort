@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace AltTestTask.FileSort.Create.Streams
+namespace ATestTask.FileSort.Create.Streams
 {
     /// <summary>
     /// produces a stream of increasing numbers from a random positive Int32 value to System.UInt64.MaxValue

@@ -1,10 +1,10 @@
-﻿using AltTestTask.FileSort.Create.Streams;
+﻿using ATestTask.FileSort.Create.Streams;
 using System;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AltTestTask.FileSort.Create
+namespace ATestTask.FileSort.Create
 {
     public static class GeneratorDriver
     {

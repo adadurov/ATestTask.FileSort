@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace AltTestTask.FileSort.Sort.Merge
+namespace ATestTask.FileSort.Sort.Merge
 {
     public class StreamMerger
     {

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using ATestTask.FileSort.Sort.Merge;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace AltTestTask.FileSort.Sort
+namespace ATestTask.FileSort.Sort
 {
-    public class ExternalRunRepository : IDisposable
+    public sealed class ExternalRunRepository : IDisposable
     {
         private readonly string _targetDirectory;
         private readonly List<string> _files;
@@ -23,9 +24,9 @@ namespace AltTestTask.FileSort.Sort
             Directory.Delete(_targetDirectory, true);
         }
 
-        public ExternalRunCollection GetStoredRunsAsIterableRecords()
+        public ExternalRunCollection GetStoredRunsAsIterableRecords(Func<FileStream, IAsyncDisposableEnumerator<Record>> iteratorFactory)
         {
-            return new ExternalRunCollection(_files);
+            return new ExternalRunCollection(_files, iteratorFactory);
         }
 
         public string Rent()

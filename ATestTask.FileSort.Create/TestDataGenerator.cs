@@ -1,4 +1,4 @@
-﻿using AltTestTask.FileSort.Create.Streams;
+﻿using ATestTask.FileSort.Create.Streams;
 using System;
 using System.Buffers;
 using System.Collections.Concurrent;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AltTestTask.FileSort.Create
+namespace ATestTask.FileSort.Create
 {
     internal class TestDataGenerator
     {

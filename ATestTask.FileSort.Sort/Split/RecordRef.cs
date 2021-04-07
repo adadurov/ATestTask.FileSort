@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AltTestTask.FileSort.Sort.Split
+namespace ATestTask.FileSort.Sort.Split
 {
     public record RecordRef
     {

@@ -1,17 +1,20 @@
-﻿using AltTestTask.FileSort.Sort.Merge;
-using AltTestTask.FileSort.Sort.Split;
+﻿using ATestTask.FileSort.Sort.Merge;
+using ATestTask.FileSort.Sort.Split;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace AltTestTask.FileSort.Sort
+namespace ATestTask.FileSort.Sort
 {
     public class SortDriver
     {
+        public int MinMergeBufferSize => 64 * (int)Units.BytesPerKiB;
+
         private readonly string _sourceFilePath;
         private readonly int _runSizeHintInMiB;
         private readonly int _maxDegreeOfParallelism;
+        private readonly int _mergeBufferSizePerRun;
         private readonly Action<string> _logger;
 
         private readonly ExternalRunRepositoryProvider _repositoryProvider;
@@ -21,22 +24,25 @@ namespace AltTestTask.FileSort.Sort
             string sourceFilePath,
             int runSizeHintInMiB,
             int maxDegreeOfParallelism,
+            int mergeBufferSizePerRun,
             Action<string> logger)
         {
             if (!File.Exists(sourceFilePath))
                 throw new ArgumentException($"File {sourceFilePath} doesn't exist.");
 
-            return new SortDriver(sourceFilePath, runSizeHintInMiB, maxDegreeOfParallelism, logger);
+            return new SortDriver(sourceFilePath, runSizeHintInMiB, maxDegreeOfParallelism, mergeBufferSizePerRun, logger);
         }
 
         private SortDriver(
             string sourceFilePath,
             int runSizeHintInMiB,
             int maxDegreeOfParallelism,
+            int mergeBufferSizePerRun,
             Action<string> logger)
         {
             _sourceFilePath = sourceFilePath;
             _runSizeHintInMiB = runSizeHintInMiB;
+            _mergeBufferSizePerRun = mergeBufferSizePerRun < MinMergeBufferSize ? MinMergeBufferSize : mergeBufferSizePerRun;
             _maxDegreeOfParallelism = maxDegreeOfParallelism;
             _logger = logger;
             _fileSplitter = new FileSplitter(logger);
@@ -135,7 +141,10 @@ namespace AltTestTask.FileSort.Sort
         {
             _logger($"Started merge on {runRepository.Count} runs");
 
-            using var runs = runRepository.GetStoredRunsAsIterableRecords();
+            using var runs = runRepository.GetStoredRunsAsIterableRecords(
+//                fileStream => new FileLineIterator(fileStream, _mergeBufferSizePerRun)
+                fileStream => new DoublyBufferedLineIterator(fileStream, _mergeBufferSizePerRun)
+                );
 
             await StreamMerger.Merge(
                 runs: runs,

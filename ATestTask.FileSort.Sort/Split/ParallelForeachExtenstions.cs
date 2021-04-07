@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 
-namespace AltTestTask.FileSort.Sort.Split
+namespace ATestTask.FileSort.Sort.Split
 {
     public static class ParallelForEachExtensions
     {

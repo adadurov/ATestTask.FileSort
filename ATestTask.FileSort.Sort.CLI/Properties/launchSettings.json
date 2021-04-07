@@ -2,7 +2,7 @@
   "profiles": {
     "ATestTask.FileSort.Sort.CLI": {
       "commandName": "Project",
-      "commandLineArgs": "f:\\ATestTask\\G001.txt"
+      "commandLineArgs": "f:\\ATestTask\\G004.txt"
     }
   }
 }

@@ -3,7 +3,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace AltTestTask.FileSort.Create.CLI
+namespace ATestTask.FileSort.Create.CLI
 {
     public class Options
     {

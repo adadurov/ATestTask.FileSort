@@ -1,10 +1,10 @@
-﻿using AltTestTask.FileSort.Sort.Merge;
+﻿using ATestTask.FileSort.Sort.Merge;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Shouldly;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace AltTestTask.FileSort.Tests.Sort.Merge
+namespace ATestTask.FileSort.Tests.Sort.Merge
 {
     [TestClass]
     public class StreamMerger_Tests
@@ -37,7 +37,7 @@ namespace AltTestTask.FileSort.Tests.Sort.Merge
         {
             return new FileLineIterator(
                 fileStream,
-                maxBytesToConsume: long.MaxValue
+                mergeBufferSizePerRun: 1024 * 1024
             );
         }
 

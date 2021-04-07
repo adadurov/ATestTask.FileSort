@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AltTestTask.FileSort.Sort.Merge
+namespace ATestTask.FileSort.Sort.Merge
 {
     public class Heap<T>
     {

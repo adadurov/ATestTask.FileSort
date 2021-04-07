@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Buffers;
-using System.Collections.Generic;
 using System.IO;
 using System.IO.Pipelines;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
-namespace AltTestTask.FileSort.Sort.Merge
+namespace ATestTask.FileSort.Sort.Merge
 {
-    public class FileLineIterator : IAsyncEnumerator<Record>, IAsyncDisposable, IDisposable
+    public sealed class FileLineIterator : IAsyncDisposableEnumerator<Record>
     {
         private static readonly byte[] _newLinemarker = LineFormat.NewLineByte;
 
@@ -16,31 +15,22 @@ namespace AltTestTask.FileSort.Sort.Merge
 
         private readonly Stream _stream;
         private readonly PipeReader _reader;
-        private readonly long _maxBytesToConsume;
 
         private Record _current;
         private long _bytesConsumed;
         private int _lineCounter;
 
-        public FileLineIterator(Stream stream, long maxBytesToConsume)
+        public FileLineIterator(Stream stream, int mergeBufferSizePerRun)
         {
             _stream = stream;
-            _maxBytesToConsume = maxBytesToConsume;
             _bytesConsumed = 0;
             _current = null;
 
-            _reader = PipeReader.Create(_stream, new StreamPipeReaderOptions(leaveOpen: true, bufferSize: 1024*1024, minimumReadSize: 1024*1024));
+            _reader = PipeReader.Create(_stream, new StreamPipeReaderOptions(leaveOpen: true, bufferSize: mergeBufferSizePerRun, minimumReadSize: mergeBufferSizePerRun));
         }
 
         public async ValueTask<Record> ReadNextRecordAsync()
         {
-            if (_bytesConsumed > _maxBytesToConsume)
-            {
-                // we've consumed all allowed bytes
-                _reader.Complete();
-                return null;
-            }
-
             do
             {
                 // read more data

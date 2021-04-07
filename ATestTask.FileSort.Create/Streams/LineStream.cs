@@ -3,7 +3,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 
-namespace AltTestTask.FileSort.Create.Streams
+namespace ATestTask.FileSort.Create.Streams
 {
     /// <summary>
     /// produces a stream of lines in the required format

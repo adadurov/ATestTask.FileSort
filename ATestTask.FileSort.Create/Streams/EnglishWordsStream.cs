@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
 
-namespace AltTestTask.FileSort.Create.Streams
+namespace ATestTask.FileSort.Create.Streams
 {
     /// <summary>
     /// Encapsulates the list of ~1000 English nouns (copied from https://gist.github.com/creikey/42d23d1eec6d764e8a1d9fe7e56915c6)

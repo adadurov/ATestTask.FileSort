@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace AltTestTask.FileSort.Sort.Split
+namespace ATestTask.FileSort.Sort.Split
 {
     public class FileSplitHelper
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace AltTestTask.FileSort.Create.Streams
+namespace ATestTask.FileSort.Create.Streams
 {
     /// <summary>
     /// produces a stream of words based on a subset of a dictionary sequentially

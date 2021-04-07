@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AltTestTask.FileSort.Sort.Split
+namespace ATestTask.FileSort.Sort.Split
 {
     public class FileSplitter
     {

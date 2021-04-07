@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AltTestTask.FileSort
+namespace ATestTask.FileSort
 {
     public static class LineFormat
     {
@@ -10,6 +10,6 @@ namespace AltTestTask.FileSort
 
         public static string PartsSeparator => ". ";
 
-        public static ReadOnlySpan<byte> PartsSeparatorBytes => new byte[] { (byte)'.', (byte)' ' }.AsSpan();
+        public static ReadOnlySpan<byte> PartsSeparatorBytes => _newLineByte.AsSpan();
     }
 }

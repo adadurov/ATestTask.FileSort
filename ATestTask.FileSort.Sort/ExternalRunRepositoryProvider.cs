@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace AltTestTask.FileSort.Sort
+namespace ATestTask.FileSort.Sort
 {
     public class ExternalRunRepositoryProvider
     {
