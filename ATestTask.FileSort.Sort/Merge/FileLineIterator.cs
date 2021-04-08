@@ -17,13 +17,11 @@ namespace ATestTask.FileSort.Sort.Merge
         private readonly PipeReader _reader;
 
         private Record _current;
-        private long _bytesConsumed;
         private int _lineCounter;
 
         public FileLineIterator(Stream stream, int mergeBufferSizePerRun)
         {
             _stream = stream;
-            _bytesConsumed = 0;
             _current = null;
 
             _reader = PipeReader.Create(_stream, new StreamPipeReaderOptions(leaveOpen: true, bufferSize: mergeBufferSizePerRun, minimumReadSize: mergeBufferSizePerRun));
@@ -48,7 +46,6 @@ namespace ATestTask.FileSort.Sort.Merge
 
                 if (newRecord != null)
                 {
-                    _bytesConsumed += consumed;
                     _reader.AdvanceTo(buffer.GetPosition(consumed, buffer.Start));
 
                     _lineCounter++;
